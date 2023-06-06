@@ -10,11 +10,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WDC</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/admin.css">
     <link rel="stylesheet" href="assets/fontawsome/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
 </head>
 
@@ -86,6 +86,7 @@
                         //$conn = mysqli_connect("localhost", "root", "", "wdc_xi");
                         $query = "SELECT * FROM tbl_activities";
                         $query_run = mysqli_query($conn, $query);
+                        $no = 1;
 
                         if (mysqli_num_rows($query_run) > 0) {
                             foreach ($query_run as $row) {
@@ -94,7 +95,7 @@
                                 <td class="peopel">
                                     
                                     <div class="peopel-de">
-                                    <h5><?= $row['id']; ?></h5>
+                                    <h5><?= $no ?></h5>
                                     </div>
                                     <td>
                                     <h5><?= $row['come']; ?></h5>
@@ -109,12 +110,13 @@
                                         <h5><?= $row['date']; ?></h5>
                                     </td>
                                     <td class="active">
-                                        <a href="../edit.php">Update</a>
-                                        <a href="../delete.php?id=$result[id]">Delete</a>
+                                        <a href="../edit.php?id=<?php echo $row['id']; ?>">Update</a>
+                                        <a href="../delete.php?id=<?php echo $row['id']; ?>">Delete</a>
                                     </td>
                                 </td>
                                 </tr>
                                 <?php
+                                $no++;
                             }
                         } else {
                             echo "No data record";
